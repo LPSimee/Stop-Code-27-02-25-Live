@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="./css/style.css" />
+        <title>Ricette per cucina</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="title-page">Recipes</h1>
+            
+            <section>
+            
+            <!-- Inserisci nuova ricetta -->
+            <div class="form">
+                <!-- Input dei dati da inserire -->
+                <div class="mb-3">
+                    <input type="email" class="form-control mb-3" placeholder="Nome Ricetta">
+                    <input type="email" class="form-control mb-3" placeholder="Difficoltà">
+                    <input type="email" class="form-control mb-3" placeholder="Calorie per porzione">
+                    <input type="email" class="form-control mb-3" placeholder="Tempo di preparazione">
+                    <input type="email" class="form-control mb-3" placeholder="Tipo di cucina">
+                </div>
+                <button style="width: 40%;margin-top: 10px;" id="add" class="btn">Aggiungi</button>
+            </div>
+
+            <!-- Barra di ricerca -->
+            <section>
+                <label for=""><b>Cerca</b></label>
+                <input type="text" id="searchText">
+                <button id="search" class="btn">Search</button>
+                <button id="reset" class="btn">Reset</button>
+            </section>
+
+            </section>  
+
+            <!-- Lista delle ricette -->
+            <div class="recipes">
+                <!-- Esempio di una card Ricetta -->
+                <!-- <div class="recipe">
+                  <div class="content">
+                    <h2>smartphones</h2>
+                    <img
+                      src="https://cdn.dummyjson.com/product-images/3/thumbnail.jpg"
+                      alt="Samsung Universe 9"
+                    />
+                    <h3>Samsung Universe 9</h3>
+                    <p>Samsung</p>
+                    <p>$ 1249</p>
+                    <p>In stock: 36</p>
+                  </div>
+                  <button class="btn button--product">View</button>
+                </div>  -->
+
+
+            </div>
+        </div>    
+        <!-- you should populate the modal with the following data: -->
+        <div class="modal modal--hidden">
+            <div class="modal-inner">
+                <button class="btn btn--close-modal">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+
+                <!-- Dettagli della ricetta -->
+                    <!-- <div class="modal-content">
+                       <img
+                        class="modal-image"
+                        src="https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+                        alt="Microsoft Surface Laptop 4"
+                      />   
+                      <div class="modal-text">
+                        <h2 class="modal-title">Microsoft Surface Laptop 4</h2>
+                        <p class="modal-price">$ 1499</p>
+                        <h3 class="modal-title-description">Description:</h3>
+                        <p class="modal-description">
+                          Style and speed. Stand out on HD video calls backed by Studio
+                          Mics. Capture ideas on the vibrant touchscreen.
+                        </p>
+                        <p class="modal-rating">Rating: 4.43</p>
+                        <button class="btn btn--add-to-cart">Add to cart</button>
+                      </div>
+                    </div>  -->
+            </div>
+        </div>      
+        <script src="./js/script.js"></script>
+    </body>
+</html>
