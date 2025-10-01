@@ -239,20 +239,20 @@ document.addEventListener("DOMContentLoaded", function () {
 // }
 
 // Funzione per mostrare i dettagli di ogni ricetta
-function mostraDettagliRicetta(recipe, container) {
-    container.innerHTML += `
-    <div class="modal-content">
-        <img class="modal-image" src="${recipe.image}" alt="${recipe.name}">
-        <div class="modal-text">
-            <h3 class="modal-title">${recipe.name}</h3>
-            <h2 class="modal-title-description">Ingredients</h2>
-            <p class="modal-description">${recipe.ingredients}</p>
-            <h2 class="modal-title-description">Description</h2>
-            <p class="modal-description">${recipe.instructions}</p>
-        </div>
-    </div>
-    `;
-}
+// function mostraDettagliRicetta(recipe, container) {
+//     container.innerHTML += `
+//     <div class="modal-content">
+//         <img class="modal-image" src="${recipe.image}" alt="${recipe.name}">
+//         <div class="modal-text">
+//             <h3 class="modal-title">${recipe.name}</h3>
+//             <h2 class="modal-title-description">Ingredients</h2>
+//             <p class="modal-description">${recipe.ingredients}</p>
+//             <h2 class="modal-title-description">Description</h2>
+//             <p class="modal-description">${recipe.instructions}</p>
+//         </div>
+//     </div>
+//     `;
+// }
 
 // Funzione per cercare una ricetta tramite id
 function cercaRicetta(id, container) {
@@ -262,9 +262,18 @@ function cercaRicetta(id, container) {
         .then(
             // Per stampare le ricette
             (data) => {
-                // console.log("Ricetta trovata", data);
+                const r = new Recipe(
+                    data.id,
+                    data.name,
+                    data.ingredients,
+                    data.instructions,
+                    data.caloriesPerServing,
+                    data.difficulty,
+                    data.image,
+                    data.cuisine
+                );
                 container.innerHTML = "";
-                mostraRicetta(data, container);
+                r.mostraRicetta(container);
             }
         )
         .catch((error) => {
