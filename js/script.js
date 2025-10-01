@@ -1,5 +1,33 @@
 // Stop&Code Finale con approccio OOP - JS Avanzato (Modulo 4)
 
+"use strict";
+
+class Recipe {
+    constructor(
+        id,
+        name,
+        ingredients,
+        instructions,
+        caloriesPerServing,
+        difficulty,
+        image,
+        cuisine
+    ) {
+        this.id = id;
+        this.name = name;
+        this.ingredients = ingredients; // array
+        this.instructions = instructions; // array
+        this.caloriesPerServing = caloriesPerServing;
+        this.difficulty = difficulty;
+        this.image = image; // URL
+        this.cuisine = cuisine;
+    }
+
+    mostraRicetta(container) {}
+
+    mostraDettagliRicetta(container) {}
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const apiRicetta = "http://localhost:3000/recipes";
 
