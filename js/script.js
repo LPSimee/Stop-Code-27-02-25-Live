@@ -148,8 +148,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Per stampare le ricette
                 (data) => {
                     contenitoreRicette.innerHTML = "";
-                    data.forEach((ricetta) => {
-                        mostraRicetta(ricetta, contenitoreRicette);
+                    data.forEach((obj) => {
+                        const r = new Recipe(
+                            obj.id,
+                            obj.name,
+                            obj.ingredients,
+                            obj.instructions,
+                            obj.caloriesPerServing,
+                            obj.difficulty,
+                            obj.image,
+                            obj.cuisine
+                        );
+                        r.mostraRicetta(contenitoreRicette);
                     });
                 }
             )
