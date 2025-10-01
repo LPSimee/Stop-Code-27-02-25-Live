@@ -29,19 +29,19 @@ class Recipe {
 
         card.innerHTML = `
         <div class="content">
-            <h2>Cucina - ${recipe.cuisine}</h2>
-            <img src="${recipe.image}" alt="${recipe.name}">
-            <h3>${recipe.name}</h3>
-            <p>Difficoltà: ${recipe.difficulty}</p>
-            <p>Calorie per porzione: ${recipe.caloriesPerServing}</p>
-            <p>Tempo di preparazione: ${recipe.prepTimeMinutes} min.</p>
+            <h2>Cucina - ${this.cuisine}</h2>
+            <img src="${this.image}" alt="${this.name}">
+            <h3>${this.name}</h3>
+            <p>Difficoltà: ${this.difficulty}</p>
+            <p>Calorie per porzione: ${this.caloriesPerServing}</p>
+            <p>Tempo di preparazione: ${this.prepTimeMinutes} min.</p>
         </div>
-        <button id="id-${recipe.id}" class="view btn button--product">View</button>
+        <button id="id-${this.id}" class="view btn button--product">View</button>
     `;
         container.appendChild(card);
 
         // Evento "click" sul bottone "View"
-        const btnView = document.querySelector("button#id-" + recipe.id);
+        const btnView = document.querySelector("button#id-" + this.id);
 
         btnView.addEventListener("click", () => {
             /* console.log("click sul bottone "View"", btnView.id); */
@@ -50,7 +50,7 @@ class Recipe {
 
             const ctnPopup = document.querySelector(".modal-inner");
             // Per inserire il contenuto del popup
-            mostraDettagliRicetta(recipe, ctnPopup);
+            mostraDettagliRicetta(ctnPopup);
         });
     }
 
