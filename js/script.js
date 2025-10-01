@@ -75,14 +75,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const contenitoreRicette = document.querySelector(".recipes");
 
+    const recipes = []; // Array contenitore delle ricette
+
     fetch(apiRicetta)
         .then((response) => response.json())
         .then(
             // Per stampare le ricette
             (data) => {
-                data.forEach((ricetta) => {
-                    /* console.log("Ricette ricevute", data); */
-                    mostraRicetta(ricetta, contenitoreRicette);
+                data.forEach((obj) => {
+                    const r = new Recipe(
+                        obj.id,
+                        obj.name,
+                        obj.ingredients,
+                        obj.instructions,
+                        obj.caloriesPerServing,
+                        obj.difficulty,
+                        obj.image,
+                        obj.cuisine
+                    );
+                    recipes.push(r);
+                    r.mostraRicetta(contenitoreRicette);
                 });
 
                 // Mettere il metodo per mostrare i dettagli della ricetta
@@ -96,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Evento "click" del bottone per chiudere il popup
     contenutoPopup.addEventListener("click", (e) => {
         /* console.log("Click sul bottone 'Close'"); */
-        if (e.target.tagnName === "BUTTON" || e.target.tagName === "I") {
+        if (e.target.tagName === "BUTTON" || e.target.tagName === "I") {
             document.querySelector(".modal").classList.add("modal--hidden");
 
             /* document.querySelector(".modal-inner").innerHTML = `
