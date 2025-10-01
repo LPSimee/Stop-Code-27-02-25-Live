@@ -57,13 +57,13 @@ class Recipe {
     mostraDettagliRicetta(container) {
         container.innerHTML += `
     <div class="modal-content">
-        <img class="modal-image" src="${recipe.image}" alt="${recipe.name}">
+        <img class="modal-image" src="${this.image}" alt="${this.name}">
         <div class="modal-text">
-            <h3 class="modal-title">${recipe.name}</h3>
+            <h3 class="modal-title">${this.name}</h3>
             <h2 class="modal-title-description">Ingredients</h2>
-            <p class="modal-description">${recipe.ingredients}</p>
+            <p class="modal-description">${this.ingredients}</p>
             <h2 class="modal-title-description">Description</h2>
-            <p class="modal-description">${recipe.instructions}</p>
+            <p class="modal-description">${this.instructions}</p>
         </div>
     </div>
     `;
