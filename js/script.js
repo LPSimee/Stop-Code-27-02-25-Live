@@ -23,9 +23,51 @@ class Recipe {
         this.cuisine = cuisine;
     }
 
-    mostraRicetta(container) {}
+    mostraRicetta(container) {
+        const card = document.createElement("div");
+        card.classList.add("recipe"); // Rendiamolo il contenitore delle ricette
 
-    mostraDettagliRicetta(container) {}
+        card.innerHTML = `
+        <div class="content">
+            <h2>Cucina - ${recipe.cuisine}</h2>
+            <img src="${recipe.image}" alt="${recipe.name}">
+            <h3>${recipe.name}</h3>
+            <p>Difficoltà: ${recipe.difficulty}</p>
+            <p>Calorie per porzione: ${recipe.caloriesPerServing}</p>
+            <p>Tempo di preparazione: ${recipe.prepTimeMinutes} min.</p>
+        </div>
+        <button id="id-${recipe.id}" class="view btn button--product">View</button>
+    `;
+        container.appendChild(card);
+
+        // Evento "click" sul bottone "View"
+        const btnView = document.querySelector("button#id-" + recipe.id);
+
+        btnView.addEventListener("click", () => {
+            /* console.log("click sul bottone "View"", btnView.id); */
+            const popup = document.querySelector(".modal.modal--hidden");
+            popup.classList.remove("modal--hidden");
+
+            const ctnPopup = document.querySelector(".modal-inner");
+            // Per inserire il contenuto del popup
+            mostraDettagliRicetta(recipe, ctnPopup);
+        });
+    }
+
+    mostraDettagliRicetta(container) {
+        container.innerHTML += `
+    <div class="modal-content">
+        <img class="modal-image" src="${recipe.image}" alt="${recipe.name}">
+        <div class="modal-text">
+            <h3 class="modal-title">${recipe.name}</h3>
+            <h2 class="modal-title-description">Ingredients</h2>
+            <p class="modal-description">${recipe.ingredients}</p>
+            <h2 class="modal-title-description">Description</h2>
+            <p class="modal-description">${recipe.instructions}</p>
+        </div>
+    </div>
+    `;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
