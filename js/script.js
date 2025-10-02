@@ -11,6 +11,7 @@ class Recipe {
         caloriesPerServing,
         difficulty,
         image,
+        prepTimeMinutes,
         cuisine
     ) {
         this.id = id;
@@ -20,9 +21,11 @@ class Recipe {
         this.caloriesPerServing = caloriesPerServing;
         this.difficulty = difficulty;
         this.image = image; // URL
+        this.prepTimeMinutes = prepTimeMinutes;
         this.cuisine = cuisine;
     }
 
+    // metodo per mostrare/stampare le ricette
     mostraRicetta(container) {
         const card = document.createElement("div");
         card.classList.add("recipe"); // Rendiamolo il contenitore delle ricette
@@ -54,6 +57,7 @@ class Recipe {
         });
     }
 
+    // metodo per mostrare i dettagli della ricetta nel popup
     mostraDettagliRicetta(container) {
         container.innerHTML += `
     <div class="modal-content">
@@ -75,8 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const contenitoreRicette = document.querySelector(".recipes");
 
-    const recipes = []; // Array contenitore delle ricette
-
     fetch(apiRicetta)
         .then((response) => response.json())
         .then(
@@ -91,13 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         obj.caloriesPerServing,
                         obj.difficulty,
                         obj.image,
+                        obj.prepTimeMinutes,
                         obj.cuisine
                     );
-                    recipes.push(r);
                     r.mostraRicetta(contenitoreRicette);
                 });
-
-                // Mettere il metodo per mostrare i dettagli della ricetta
             }
         )
         .catch((error) => console.log(error));
@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             obj.caloriesPerServing,
                             obj.difficulty,
                             obj.image,
+                            obj.prepTimeMinutes,
                             obj.cuisine
                         );
                         r.mostraRicetta(contenitoreRicette);
@@ -193,19 +194,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then((response) => response.json())
                 .then((data) => {
                     const id = `${data.length + 1}`;
-                    const nuovaRicetta = {
-                        id: id,
-                        name: nomeRicetta,
-                        difficulty: difficolta,
-                        caloriesPerServing: calorie,
-                        prepTimeMinutes: tempoPreparazione,
-                        ingredients:
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta totam voluptas veniam tenetur rerum labore aut neque atque? Eaque ipsum officia dolor, nihil veritatis et doloribus obcaecati harum nam deleniti.",
-                        instructions:
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nulla, fugiat reprehenderit sequi labore velit mollitia alias vero ea perferendis illum voluptatum consequatur molestiae doloremque odit ratione neque natus magnam? Repellat fugit explicabo temporibus ipsam sequi expedita repellendus placeat incidunt ex voluptatum facere id, perspiciatis magnam ut illum a dolore nemo aliquid dignissimos inventore ipsum aperiam quisquam? Amet, sit. Possimus.",
-                        image: "https://cdn.dummyjson.com/recipe-images/1.webp",
-                        cuisine: cucina,
-                    };
+                    const nuovaRicetta = new Recipe(
+                        id,
+                        nomeRicetta,
+                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta totam voluptas veniam tenetur rerum labore aut neque atque? Eaque ipsum officia dolor, nihil veritatis et doloribus obcaecati harum nam deleniti.",
+                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nulla, fugiat reprehenderit sequi labore velit mollitia alias vero ea perferendis illum voluptatum consequatur molestiae doloremque odit ratione neque natus magnam? Repellat fugit explicabo temporibus ipsam sequi expedita repellendus placeat incidunt ex voluptatum facere id, perspiciatis magnam ut illum a dolore nemo aliquid dignissimos inventore ipsum aperiam quisquam? Amet, sit. Possimus.",
+                        calorie,
+                        difficolta,
+                        "https://cdn.dummyjson.com/recipe-images/1.webp",
+                        tempoPreparazione,
+                        cucina
+                    );
 
                     aggiungiRicetta(apiRicetta, nuovaRicetta);
                 })
@@ -213,56 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 }); // DOMContentLoaded
-
-// Funzione per mostrare/stampare le ricette
-// function mostraRicetta(recipe, container) {
-//     /* console.log("Ricetta da stampare", recipe); */
-
-//     const card = document.createElement("div");
-//     card.classList.add("recipe"); // Rendiamolo il contenitore delle ricette
-
-//     card.innerHTML = `
-//         <div class="content">
-//             <h2>Cucina - ${recipe.cuisine}</h2>
-//             <img src="${recipe.image}" alt="${recipe.name}">
-//             <h3>${recipe.name}</h3>
-//             <p>Difficoltà: ${recipe.difficulty}</p>
-//             <p>Calorie per porzione: ${recipe.caloriesPerServing}</p>
-//             <p>Tempo di preparazione: ${recipe.prepTimeMinutes} min.</p>
-//         </div>
-//         <button id="id-${recipe.id}" class="view btn button--product">View</button>
-//     `;
-//     container.appendChild(card);
-
-//     // Evento "click" sul bottone "View"
-//     const btnView = document.querySelector("button#id-" + recipe.id);
-
-//     btnView.addEventListener("click", () => {
-//         /* console.log("click sul bottone "View"", btnView.id); */
-//         const popup = document.querySelector(".modal.modal--hidden");
-//         popup.classList.remove("modal--hidden");
-
-//         const ctnPopup = document.querySelector(".modal-inner");
-//         // Per inserire il contenuto del popup
-//         mostraDettagliRicetta(recipe, ctnPopup);
-//     });
-// }
-
-// Funzione per mostrare i dettagli di ogni ricetta
-// function mostraDettagliRicetta(recipe, container) {
-//     container.innerHTML += `
-//     <div class="modal-content">
-//         <img class="modal-image" src="${recipe.image}" alt="${recipe.name}">
-//         <div class="modal-text">
-//             <h3 class="modal-title">${recipe.name}</h3>
-//             <h2 class="modal-title-description">Ingredients</h2>
-//             <p class="modal-description">${recipe.ingredients}</p>
-//             <h2 class="modal-title-description">Description</h2>
-//             <p class="modal-description">${recipe.instructions}</p>
-//         </div>
-//     </div>
-//     `;
-// }
 
 // Funzione per cercare una ricetta tramite id
 function cercaRicetta(id, container) {
@@ -280,6 +229,7 @@ function cercaRicetta(id, container) {
                     data.caloriesPerServing,
                     data.difficulty,
                     data.image,
+                    data.prepTimeMinutes,
                     data.cuisine
                 );
                 container.innerHTML = "";
