@@ -59,7 +59,7 @@ class Recipe {
 
     // metodo per mostrare i dettagli della ricetta nel popup
     mostraDettagliRicetta(container) {
-        container.innerHTML += `
+        container.innerHTML = `
     <div class="modal-content">
         <img class="modal-image" src="${this.image}" alt="${this.name}">
         <div class="modal-text">
@@ -80,26 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const contenitoreRicette = document.querySelector(".recipes");
 
     fetch(apiRicetta)
-        .then((response) => response.json())
-        .then(
-            // Per stampare le ricette
-            (data) => {
-                data.forEach((obj) => {
-                    const r = new Recipe(
-                        obj.id,
-                        obj.name,
-                        obj.ingredients,
-                        obj.instructions,
-                        obj.caloriesPerServing,
-                        obj.difficulty,
-                        obj.image,
-                        obj.prepTimeMinutes,
-                        obj.cuisine
-                    );
-                    r.mostraRicetta(contenitoreRicette);
-                });
-            }
-        )
+        .then((res) => res.json())
+        .then((data) => chiamaRicette(data, contenitoreRicette))
         .catch((error) => console.log(error));
 
     // Parte chiusura popup
@@ -143,27 +125,8 @@ document.addEventListener("DOMContentLoaded", function () {
         /* console.log("Click sul bottone RESET"); */
 
         fetch(apiRicetta)
-            .then((response) => response.json())
-            .then(
-                // Per stampare le ricette
-                (data) => {
-                    contenitoreRicette.innerHTML = "";
-                    data.forEach((obj) => {
-                        const r = new Recipe(
-                            obj.id,
-                            obj.name,
-                            obj.ingredients,
-                            obj.instructions,
-                            obj.caloriesPerServing,
-                            obj.difficulty,
-                            obj.image,
-                            obj.prepTimeMinutes,
-                            obj.cuisine
-                        );
-                        r.mostraRicetta(contenitoreRicette);
-                    });
-                }
-            )
+            .then((res) => res.json())
+            .then((data) => chiamaRicette(data, contenitoreRicette))
             .catch((error) => console.log(error));
     });
 
@@ -212,6 +175,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 }); // DOMContentLoaded
+
+// Funzione per la chiamata delle ricette
+function chiamaRicette(data, container) {
+    container.innerHTML = "";
+    data.forEach((obj) => {
+        const r = new Recipe(
+            obj.id,
+            obj.name,
+            obj.ingredients,
+            obj.instructions,
+            obj.caloriesPerServing,
+            obj.difficulty,
+            obj.image,
+            obj.prepTimeMinutes,
+            obj.cuisine
+        );
+        r.mostraRicetta(container);
+    });
+}
 
 // Funzione per cercare una ricetta tramite id
 function cercaRicetta(id, container) {
