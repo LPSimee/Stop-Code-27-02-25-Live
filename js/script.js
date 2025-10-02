@@ -59,18 +59,18 @@ class Recipe {
 
     // metodo per mostrare i dettagli della ricetta nel popup
     mostraDettagliRicetta(container) {
-        container.innerHTML = `
-    <div class="modal-content">
-        <img class="modal-image" src="${this.image}" alt="${this.name}">
-        <div class="modal-text">
-            <h3 class="modal-title">${this.name}</h3>
-            <h2 class="modal-title-description">Ingredients</h2>
-            <p class="modal-description">${this.ingredients}</p>
-            <h2 class="modal-title-description">Description</h2>
-            <p class="modal-description">${this.instructions}</p>
-        </div>
-    </div>
-    `;
+        container.innerHTML += `
+            <div class="modal-content">
+                <img class="modal-image" src="${this.image}" alt="${this.name}">
+                <div class="modal-text">
+                    <h1 class="modal-title">${this.name}</h1>
+                    <h2 class="modal-title-description">Ingredients</h2>
+                    <p>${this.ingredients.join(" ")}</p>
+                    <h2 class="modal-title-description">Description</h2>
+                    <p>${this.instructions.join(" ")}</p>
+                </div>
+            </div>
+        `;
     }
 }
 
