@@ -133,6 +133,7 @@ section button.btn#reset {
 .modal .modal-inner {
     position: relative;
     width: 60%;
+    max-height: 95vh;
     padding: 50px;
     border: 5px solid rgb(107, 97, 105);
     border-radius: 20px;
@@ -173,6 +174,8 @@ section button.btn#reset {
 
 .modal .modal-image {
     width: 50%;
+    max-width: 400px;
+
     aspect-ratio: 16/9;
     object-fit: cover;
     display: block;
@@ -212,4 +215,43 @@ section button.btn#reset {
 .modal-text {
     width: 80%;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 992px) {
+    .modal {
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+    .modal .modal-inner {
+        width: 80%;
+        overflow-y: auto;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .form {
+        width: 100%;
+    }
+    section {
+        flex-direction: column;
+    }
+    section section {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .modal-content {
+        overflow: auto;
+    }
+
+    .modal .modal-inner {
+        width: 90%;
+        padding: 20px;
+        max-height: 90vh; /* 🔹 più spazio su mobile */
+        overflow-y: auto;
+    }
+    .modal .modal-image {
+        width: 100%;
+        height: auto;
+    }
 }
